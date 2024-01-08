@@ -1,0 +1,78 @@
+.creditCardForm {
+    max-width: 700px;
+    background-color: #fff;
+    margin: 10px auto;
+    overflow: hidden;
+    padding: 25px;
+    color: #4c4e56;
+}
+
+.creditCardForm label {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.creditCardForm .payment {
+    float: left;
+    font-size: 18px;
+    padding: 10px 25px;
+    position: relative;
+}
+
+.creditCardForm .payment .form-group {
+    float: left;
+    margin-bottom: 5px;
+}
+
+.creditCardForm .payment .form-control {
+    line-height: 40px;
+    height: auto;
+    padding: 0 16px;
+}
+
+.creditCardForm .owner {
+    width: 63%;
+    margin-right: 10px;
+}
+
+.creditCardForm .CVV {
+    width: 35%;
+}
+
+.creditCardForm #card-number-field {
+    width: 100%;
+}
+
+
+.creditCardForm #credit_cards {
+    width: 70%;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.creditCardForm #pay-now {
+    width: 100%;
+    margin-top: 5px;
+}
+
+.creditCardForm .payment .btn {
+    width: 50%;
+    margin-top: 3px;
+    font-size: 24px;
+    background-color: #1167b1;
+    color: white;
+}
+
+.transparent {
+    opacity: 0.2;
+}
+
+.examples-note{
+    text-align: center;
+    font-size: 20px;
+    max-width: 700px;
+    color: red;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+
+}

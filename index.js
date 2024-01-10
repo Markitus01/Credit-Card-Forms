@@ -150,7 +150,7 @@ function escripturaNums(e)
 {
     let nums = e.target.value;
 
-    let numsFinal = nums.replace(/\D/g, '');
+    let numsFinal = nums.replace(/\D/, '');
 
     const numsTarja = numsFinal.match(/\d{1,4}/g);
 
@@ -159,20 +159,32 @@ function escripturaNums(e)
 
 function validarNums(input)
 {
-    let longitud;
-    let longitud_extra;
     let regexp_numero;
 
     for (let i = 0; i < inputs.length; i++)
     {
-        if (inputs[i].length.length > 1) //Si tenim un array
-        {
-            longitud = inputs[i].length[0];
-            longitud_extra = inputs[i].length[1];
-        }
-        else
-        {
-            longitud = inputs[i].length;
+        switch (inputs[i].first) {
+            case 34, 37:
+                let n1 = inputs[i].first[0];
+                let n2 = inputs[i].first[1];
+                regexp_numero = new RegExp("^("+ n1 + "[0-9]{2}|"+ n2 +"[0-9]{2})([ ][0-9]{4}[ ][0-9]{4}[ ][0-9]{3})$");
+                console.log(regexp_numero);
+                break;
+            
+            case 4:
+                regexp_numero = /([ ][0-9]|[ ][0-9]{4})/;
+                break;
+
+            case 51, 52, 53, 54, 55:
+                console.log(inputs[i].length);
+                break;
+            
+            case 60, 6521, 6522:
+                console.log(inputs[i].length);
+                break;
+        
+            default:
+                break;
         }
     }
 

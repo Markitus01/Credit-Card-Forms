@@ -40,21 +40,6 @@ function main()
         nomesLletres(this);
     });
 
-    cvv.addEventListener("input", function()
-    {
-        nomesNums(this);
-    });
-
-    tarja.addEventListener("input", function()
-    {
-        nomesNums(this);
-    });
-
-    caducitat.addEventListener("input", function()
-    {
-        nomesNums(this);
-    });
-
     let arrayValidacions = []; // Array on guardarem el resultat de les validacions
 
     titular.addEventListener("focusout", function()
@@ -89,6 +74,22 @@ function main()
         }
     });
 
+    tarja.addEventListener("input", escripturaNums);
+
+    tarja.addEventListener("focusout", function ()
+    {
+        let numsIndex = arrayValidacions.findIndex(x => x.camp == "numeros");
+
+        if (numsIndex != -1)
+        {
+            arrayValidacions[numsIndex].valid = validarNums(this);
+        }
+        else
+        {
+            arrayValidacions.push({ camp: "numeros", valid: validarNums(this) });
+        }
+    });
+
     caducitat.addEventListener("input", escripturaCaducitat);
 
     caducitat.addEventListener("focusout", function()
@@ -106,16 +107,21 @@ function main()
 
         console.log(arrayValidacions);
     });
+
+    //Exercici 4: https://stackoverflow.com/questions/22335482/how-do-you-reset-a-form-after-ok-is-clicked-in-a-confirm-box
+    let form = document.forms[0];
+    form.addEventListener("reset", function(e)
+    {
+        if (!confirm("Vols reiniciar?"))
+        {
+            e.preventDefault();
+        }
+    });
 }
 
 function nomesLletres(input)
 {
     input.value = input.value.replace(/[^a-zA-Z\s]/, '').toUpperCase();
-}
-
-function nomesNums(input)
-{
-    input.value = input.value.replace(/[^0-9]/, '');
 }
 
 function validarTitular(input)
@@ -139,6 +145,40 @@ function validarCVV(input)
     return regexp_cvv.test(input.value);
 }
 
+// https://stackoverflow.com/questions/53427046/how-to-add-space-between-every-4-characters-in-javascript
+function escripturaNums(e)
+{
+    let nums = e.target.value;
+
+    let numsFinal = nums.replace(/\D/g, '');
+
+    const numsTarja = numsFinal.match(/\d{1,4}/g);
+
+    e.target.value = numsTarja.join(' ');
+}
+
+function validarNums(input)
+{
+    let longitud;
+    let longitud_extra;
+    let regexp_numero;
+
+    for (let i = 0; i < inputs.length; i++)
+    {
+        if (inputs[i].length.length > 1) //Si tenim un array
+        {
+            longitud = inputs[i].length[0];
+            longitud_extra = inputs[i].length[1];
+        }
+        else
+        {
+            longitud = inputs[i].length;
+        }
+    }
+
+    return regexp_numero.test(input.value);
+}
+
 function escripturaCaducitat(e)
 {
     let caducitat = e.target.value;
@@ -155,10 +195,9 @@ function escripturaCaducitat(e)
     e.target.value = inputFinal.slice(0, 5);
 }
 
-
 function validarCaducitat(input)
 {
-    let regexp_caduca = /(^0[1-9]|1[0-2])\/(\d{2}$)/;
+    let regexp_caduca = /(^0[1-9]|1[0-2])\/(2[1-6]$)/;
 
     return regexp_caduca.test(input.value);
 }
